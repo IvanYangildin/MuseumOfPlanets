@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4799486604911667321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5319000817593823939}
+  - component: {fileID: 5645924530748636993}
+  - component: {fileID: 5645924530748637022}
+  - component: {fileID: 5645924530748637021}
+  - component: {fileID: 1426318250177741029}
+  m_Layer: 6
+  m_Name: LavaCoat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5319000817593823939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799486604911667321}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.027, z: -2.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3152588114306034690}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &5645924530748636993
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799486604911667321}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &5645924530748637022
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799486604911667321}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.06
+  m_Center: {x: 0.010975331, y: -0.001670897, z: 0.01224947}
+--- !u!114 &5645924530748637021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799486604911667321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d57d44f849452e42bcd1e0820a7b878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promtMessage: E to take
+  holdOffset: {x: 0, y: 0.427, z: 0.069}
+  holdAngle: {x: 0, y: 0, z: 0, w: 0}
+  defaultAngle: {x: 0, y: 0, z: 0, w: 0}
+  defaultOffset: {x: 0, y: 0.05, z: 0}
+  basicLayer: 6
+  tester: {fileID: 1426318250177741029}
+  DenyMessage: Too hot to take!
+--- !u!114 &1426318250177741029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799486604911667321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d46e545c587e1a4fbe5d38610fdbbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyTagsList:
+  - HotItem
+  - TweezersCaring
+--- !u!1001 &3191512075069885417
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5319000817593823939}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0127
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0152
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.057164323
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.463252e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9983648
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.463252e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+      propertyPath: m_Name
+      value: LavaRock
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+--- !u!4 &3152588114306034690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1148437ba9360a449b70562a7df5cd94, type: 3}
+  m_PrefabInstance: {fileID: 3191512075069885417}
+  m_PrefabAsset: {fileID: 0}
