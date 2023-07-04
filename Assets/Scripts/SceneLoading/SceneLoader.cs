@@ -3,51 +3,82 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : GameSignleton<SceneLoader>
+static public class SceneLoader
 {
-
-    Func<IEnumerator> do_update = null;
-
-    public static IEnumerator SetActive(string sceneName)
+    private class Loader : GameSignleton<Loader>
     {
-        Scene scene = SceneManager.GetSceneByName(sceneName);
-        while (!scene.isLoaded) yield return null;
-        SceneManager.SetActiveScene(scene);
-        yield break;
-    }
+        public Action loading = null;
+        public float progress { private set; get; } = 1f;
 
-    public static void TransitToScene(string sceneName)
-    {
-        SceneActivator.Activate(SceneManager.GetActiveScene(), false);
+        public bool isLoading = false;
 
-        Scene scene = SceneManager.GetSceneByName(sceneName);
-        if (scene.isLoaded)
+
+
+        public IEnumerator load(string sceneName, string loadingName, bool reload)
         {
-            SceneManager.SetActiveScene(scene);
-            SceneActivator.Activate(scene, true);
-        }
-        else
-        {
-            Instance.do_update = () => 
+            isLoading = true;
+
+            Scene scene = SceneManager.GetSceneByName(sceneName);
+            if (reload && scene.isLoaded)
             {
-                return SetActive(sceneName); 
-            };
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+                var async = SceneManager.UnloadSceneAsync(sceneName);
+                yield return new WaitUntil(() => async.isDone);
+                scene = SceneManager.GetSceneByName(sceneName);
+            }
+
+            if (!scene.isLoaded)
+            {
+                var async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+                while (!async.isDone)
+                {
+                    progress = async.progress;
+                    yield return null;
+                }
+                scene = SceneManager.GetSceneByName(sceneName);
+            }
+            else
+            {
+                SceneActivator.Activate(scene, true);
+            }
+            SceneManager.SetActiveScene(scene);
+
+            // destory loading scene
+
+            SceneManager.UnloadSceneAsync(loadingName);
+
+            isLoading = false;
+            yield break;
         }
+
     }
 
-    private void Update()
+
+    public static void LoadWithDeactivate(string sceneName, string loadingName, bool reload)
     {
-        if (do_update != null) 
+        LoadWith(sceneName, loadingName, SceneRemoveType.Deactivate, reload);
+    }
+
+    public static void LoadWithUnload(string sceneName, string loadingName, bool reload)
+    {
+        LoadWith(sceneName, loadingName, SceneRemoveType.Unload, reload);
+    }
+
+    public static void LoadWith(string sceneName, string loadingName, SceneRemoveType remove_t, bool reload)
+    {
+        if (!Loader.Instance.isLoading)
         {
-            StartCoroutine(do_update()); 
-            do_update = null;
-        }
-    }
+            Loader.Instance.isLoading = true;
 
-    public static void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
+            Scene prev = SceneManager.GetActiveScene();
+            
+            var _async = SceneManager.LoadSceneAsync(loadingName, LoadSceneMode.Additive);
+            _async.allowSceneActivation = true;
+            _async.completed += arg =>
+            {
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingName));
+                SceneActivator.RemoveScene(prev, remove_t);
+                Loader.Instance.StartCoroutine(Loader.Instance.load(sceneName, loadingName, reload));
+            };
+        } 
     }
-
 }

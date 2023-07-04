@@ -25,7 +25,7 @@ public class PlayerHoldItem : MonoBehaviour
 
     public Vector3 DropOffset(Collider collider)
     {
-        if (playerInteract.InteractData.distance > dropDistance) return Vector3.zero;
+        if (playerInteract.InteractData.distance > dropDistance + 10f) return Vector3.zero;
 
         Vector3 normal = playerInteract.InteractData.normal;
 

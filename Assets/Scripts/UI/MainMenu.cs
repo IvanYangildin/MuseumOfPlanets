@@ -6,25 +6,26 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    string startScene, menuScene;
+    string startScene, gameScene, menuScene, loadingScene;
 
     public void StartGame()
     {
-        SceneLoader.LoadScene(startScene);
+        SceneLoader.LoadWithUnload(startScene, loadingScene, true);
     }
 
     public void ContinueGame()
     {
-        SceneLoader.TransitToScene(startScene);
+        SceneLoader.LoadWithUnload(gameScene, loadingScene, false);
     }
 
     public void ExitGame()
     {
+        GlobalManager.ExitGame();
         Application.Quit();
     }
 
     public void MainManu()
     {
-        SceneLoader.TransitToScene(menuScene);
+        SceneLoader.LoadWithDeactivate(menuScene, loadingScene, false);
     }
 }

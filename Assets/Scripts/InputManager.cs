@@ -41,11 +41,13 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         onFoot.Enable();
     }
 
     private void OnDisable()
     {
+        Cursor.lockState = CursorLockMode.None;
         onFoot.Disable();
     }
 }

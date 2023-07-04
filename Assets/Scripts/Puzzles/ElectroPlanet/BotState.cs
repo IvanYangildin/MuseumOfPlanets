@@ -24,11 +24,11 @@ public class BotState : MonoBehaviour
     {
         IsControl = false;
 
-        if (botInput.Player != null)
-            botInput.Player.gameObject.SetActive(true);
         if (botInput != null)
             botInput.enabled= false;
         if (computerCamera != null)
             computerCamera.gameObject.SetActive(false);
+        if (botInput.Player != null)
+            botInput.Player.gameObject.SetActive(true);
     }
 }
