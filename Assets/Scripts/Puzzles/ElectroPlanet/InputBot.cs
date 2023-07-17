@@ -15,6 +15,9 @@ public class InputBot : MonoBehaviour
     [SerializeField]
     BotLever leverHor, leverVert;
 
+    [SerializeField]
+    float botSencitivity;
+
     public PlayerInteract Player;
 
     private void Awake()
@@ -35,7 +38,7 @@ public class InputBot : MonoBehaviour
             botMotion.ProcessMove(new Vector2(0, move.y));
 
         if (Mathf.Sign(-leverHor.Angle) == Mathf.Sign(move.x))
-            botLook.ProcessLook(new Vector2(move.x, 0));
+            botLook.ProcessLook(new Vector2(move.x, 0), botSencitivity);
     }
 
     private void OnEnable()

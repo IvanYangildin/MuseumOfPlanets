@@ -13,7 +13,9 @@ public class ElectroPuzzle : PasswordSequential<ArrowType>
     public bool IsFail { private set; get; } = false;
 
     public override bool IsFinished => base.IsFinished || IsFail;
-    public override bool IsSolved => IsFinished && !IsFail;
+    public override bool IsSolved => base.IsSolved && !IsFail;
+
+    private void tryAgain() => IsFail = false;
 
     protected override void processFailure(ArrowType symbol)
     {
@@ -21,16 +23,7 @@ public class ElectroPuzzle : PasswordSequential<ArrowType>
         if ((symbol == ArrowType.Back) || (symbol == ArrowType.Noone))
         {
             ResetCombination();
+            tryAgain();
         }
-    }
-
-    protected override void processReset()
-    {
-        IsFail = false;
-    }
-
-    protected override void processOverabundance()
-    {
-        ResetCombination();
     }
 }

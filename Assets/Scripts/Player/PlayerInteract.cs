@@ -52,10 +52,11 @@ public class PlayerInteract : MonoBehaviour
         Target = null;
 
         Ray ray = new Ray(position, direction);
-        Debug.DrawRay(ray.origin, ray.direction * distance);
+        // Debug.DrawRay(ray.origin, ray.direction * distance);
 
         if (Physics.Raycast(ray, out InteractData, distance, mask))
         {
+            Debug.DrawLine(ray.origin, InteractData.point);
             ExtractPoint = (dist) => SimpleExctract(dist, InteractData.distance);
             Target = InteractData.collider.GetComponent<Interactable>();
             if (Target != null)

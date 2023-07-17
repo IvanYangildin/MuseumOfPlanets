@@ -14,6 +14,7 @@ public class MainPuzzle : PasswordSequential<PlanetLabel>
 
     public Portal MainPortal => mainPortal;
     public Portal DestinationPortal => destinationPortal;
+    protected override void processFailure(PlanetLabel symbol) { }
 
     public PortalPlace Entry(PlanetLabel label)
     {

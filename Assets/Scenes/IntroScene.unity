@@ -556,7 +556,7 @@ MonoBehaviour:
   - You're trying to employ as keeper of Museum of Planets.
   - You've heard a lot about this place, but first of all - how weird can be people
     working here.
-  - So enetering you're prepared, that it will be unusual interview
+  - So entering you're prepared, that it will be unusual interview
   pauseBeforeStart: 0.1
   ClickOut:
     m_PersistentCalls:

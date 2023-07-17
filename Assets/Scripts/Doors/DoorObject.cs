@@ -89,7 +89,9 @@ public class DoorObject : MonoBehaviour
                 openness = OpennessType.Close;
                 OnClose?.Invoke();
             }
-            moving = motionless;
+            // if OnClose or OnOpen called Close or Open again
+            if ((openness == OpennessType.Open) || (openness == OpennessType.Close))
+                moving = motionless;
         }
     }
 }

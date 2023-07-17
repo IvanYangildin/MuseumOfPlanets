@@ -16,13 +16,13 @@ public class PlayerLook : MonoBehaviour
 
     private float xRotation = 0;
 
-    public void ProcessLook(Vector2 input)
+    public void ProcessLook(Vector2 input, float sensitivity)
     {
-        xRotation -= (input.y * Time.deltaTime) * GlobalManager.Settings.sensitivity;
+        xRotation -= (input.y * Time.deltaTime) * sensitivity;
         xRotation = Mathf.Clamp(xRotation, MinAngle, MaxAngle);
 
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        transform.Rotate(Vector3.up * (input.x * Time.deltaTime) * GlobalManager.Settings.sensitivity);
+        transform.Rotate(Vector3.up * (input.x * Time.deltaTime) * sensitivity);
 
         if (OnLooked != null)
         {

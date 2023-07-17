@@ -1,38 +1,47 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PasswordSequential<T> : MonoBehaviour
 {
     [SerializeField]
     protected List<T> trueCombination = new List<T>();
+    protected List<T> currentCombination = new List<T>();
 
     protected int currentInput = 0;
     public int CurrentInput => currentInput;
 
-    public virtual bool IsFinished => CurrentInput >= trueCombination.Count;
-    public virtual bool IsSolved => IsFinished;
+    public virtual bool IsFinished => currentCombination.Count >= trueCombination.Count;
+    public virtual bool IsSolved => trueCombination.SequenceEqual(currentCombination);
 
     protected virtual void processFailure(T symbol) { ResetCombination(); }
     protected virtual void processReset() { }
-    protected virtual void processOverabundance() { }
 
     public void ResetCombination()
     {
         processReset();
-        currentInput = 0;
+        currentCombination.Clear();
     }
 
     public bool Enter(T symbol)
     {
-        if (IsFinished)
+        bool finish = IsFinished;
+
+        currentCombination.Add(symbol);
+        if (finish)
         {
-            processOverabundance();
-            return IsSolved;
+            currentCombination.RemoveAt(0);
+            if (!IsSolved)
+            {
+                processFailure(symbol);
+                return false;
+            }
+            else
+                return true;
         }
-        else if (Equals(symbol, trueCombination[currentInput]))
+        else if (Equals(symbol, trueCombination[currentCombination.Count - 1]))
         {
-            currentInput++;
             return IsSolved;
         }
 

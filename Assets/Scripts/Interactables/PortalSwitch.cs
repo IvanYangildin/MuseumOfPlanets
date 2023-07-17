@@ -12,7 +12,10 @@ public class PortalSwitch : Interactable
     [SerializeField]
     PlanetLabel destinationLabel;
 
-    protected override void interact(PlayerInteract playerInteract)
+    [SerializeField]
+    DoorObject button;
+
+    private void portalSwitch()
     {
         if (mainPuzzle.Enter(destinationLabel))
         {
@@ -21,6 +24,20 @@ public class PortalSwitch : Interactable
         else
         {
             mainPuzzle.Entry(destinationLabel).SummonPortal(mainPuzzle.DestinationPortal);
+        }
+    }
+
+    protected override void interact(PlayerInteract playerInteract)
+    {
+        if (button == null)
+        {
+            portalSwitch();
+        }
+        else if (button.Openness == OpennessType.Close)
+        {
+            button.Open();
+            button.OnOpen += button.Close;
+            portalSwitch();
         }
     }
 }
