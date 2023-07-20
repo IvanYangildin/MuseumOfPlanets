@@ -12,6 +12,11 @@ public class SunEnviroment : MonoBehaviour
     Light Sun;
     [SerializeField]
     Animator Flower;
+
+    [SerializeField]
+    Ambient ambient;
+    [SerializeField]
+    AudioClip nightAmbience, dayAmbience;
     
     [SerializeField]
     Collider invisibleBox;
@@ -38,6 +43,9 @@ public class SunEnviroment : MonoBehaviour
         {
             Sun.gameObject.SetActive(false);
             skybox.material.mainTexture = night;
+            
+            ambient.Ambience = nightAmbience;
+
             mode = DaytimeMode.Night;
             Flower.SetTrigger("NightTime");
             invisibleBox.transform.position = boxDefault;
@@ -50,6 +58,9 @@ public class SunEnviroment : MonoBehaviour
         {
             Sun.gameObject.SetActive(true);
             skybox.material.mainTexture = day;
+            
+            ambient.Ambience = dayAmbience;
+
             mode = DaytimeMode.Day;
             Flower.SetTrigger("DayTime");
             invisibleBox.transform.position = boxOut;

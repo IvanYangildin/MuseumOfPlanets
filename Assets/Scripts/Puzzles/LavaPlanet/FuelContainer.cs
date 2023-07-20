@@ -90,4 +90,28 @@ public class FuelContainer : Interactable
     {
         Gizmos.DrawLine(worldEnd, worldStart);
     }
+
+    [SerializeField]
+    string strTakeFuel, strPutFuel, strNeedFuel, strOpenLid;
+
+    public override string PromtMessage(PlayerInteract playerInteract)
+    {
+        if (lid.Openness == OpennessType.Open)
+        {
+            if (Fullness == FullnessType.Empty)
+            {
+                PlayerHoldItem holder = playerInteract.GetComponent<PlayerHoldItem>();
+                return ((holder != null) && (holder.Item?.GetComponent<Fuel>() != null))? 
+                    strPutFuel : strNeedFuel;
+            }
+
+            return strTakeFuel;
+        }
+        else if (lid.Openness == OpennessType.Close)
+        {
+            return strOpenLid;
+        }
+
+        return base.PromtMessage(playerInteract);
+    }
 }

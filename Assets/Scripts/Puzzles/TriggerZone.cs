@@ -7,6 +7,8 @@ public class TriggerZone : MonoBehaviour
     public delegate void HandleTrigger(Collider enterer);
     public event HandleTrigger OnEnter;
     public event HandleTrigger OnExit;
+    // this event invoke when object inside zone is being destroyed
+    public event HandleTrigger OnVanished;
     public event HandleTrigger OnStay;
 
     List<Collider> entered = new List<Collider>();
@@ -41,10 +43,11 @@ public class TriggerZone : MonoBehaviour
         List<Collider> updated = new List<Collider>();
         foreach (var obj in entered)
         {
-            if (obj.bounds.Intersects(trigger.bounds)) updated.Add(obj);
+            if ((obj != null) && (obj.bounds.Intersects(trigger.bounds))) updated.Add(obj);
             else
             {
-                if (OnExit != null) OnExit(obj);
+                if (obj == null) OnVanished?.Invoke(obj);
+                else OnExit?.Invoke(obj);
             }
         }
         entered = updated;

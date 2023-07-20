@@ -30,14 +30,19 @@ public class TakenObject : Interactable
     protected Rigidbody body;
 
     [SerializeField]
+    protected AudioClip takenSound = null;
+
+    AudioClip getTakenSound(PlayerHoldItem holder)
+    {
+        return (takenSound == null) ? holder.TakeSoundDefault : takenSound;
+    }
+
+    [SerializeField]
     protected int basicLayer = 6;
     public int BasicLayer => basicLayer;
-    protected Transform basicParent;
 
     private void Awake()
     {
-        basicParent = gameObject.transform.parent;
-
         body = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -89,6 +94,7 @@ public class TakenObject : Interactable
             transform.localRotation = holdAngle;
 
             currentHolder = playerHold;
+            AudioSource.PlayClipAtPoint(getTakenSound(playerHold), playerHold.transform.position);
 
             take(playerHold);
         }

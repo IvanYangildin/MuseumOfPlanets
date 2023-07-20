@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 317617457601306564}
   - component: {fileID: 317617457601306571}
+  - component: {fileID: 3610202575960194789}
   m_Layer: 0
   m_Name: BotDoor
   m_TagString: Untagged
@@ -48,7 +49,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 317617458545419910}
   trigger: {fileID: 317617457846226875}
-  portalContinue: {fileID: 0}
+  portalLocalPos: {x: 0, y: 0, z: 0}
+  nextRoom: {fileID: 0}
+  doorType: 0
+--- !u!114 &3610202575960194789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317617457601306565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cddfd9af669c0c94c8d2c37bc4985fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 317617458545419910}
+  OnOpen:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClose:
+    m_PersistentCalls:
+      m_Calls: []
+  OnOpening:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClosing:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &317617457846226864
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,5 +280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openness: 2
+  isLock: 0
   height: 3
-  speed: 10
+  speed: 8

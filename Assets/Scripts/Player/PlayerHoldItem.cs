@@ -10,6 +10,10 @@ public class PlayerHoldItem : MonoBehaviour
     [SerializeField]
     float dropDistance;
 
+    [SerializeField]
+    AudioClip takeSoundDefault;
+    public AudioClip TakeSoundDefault => takeSoundDefault;
+
     public Transform ParentForItem
     {
         get 
