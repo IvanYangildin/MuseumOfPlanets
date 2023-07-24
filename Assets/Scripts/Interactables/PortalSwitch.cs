@@ -13,17 +13,22 @@ public class PortalSwitch : Interactable
     PlanetLabel destinationLabel;
 
     [SerializeField]
+    SceneRenderControl src;
+
+    [SerializeField]
     DoorObject button;
 
-    private void portalSwitch()
+    public void Switch()
     {
         if (mainPuzzle.Enter(destinationLabel))
         {
             mainPuzzle.Entry(PlanetLabel.Contract).SummonPortal(mainPuzzle.DestinationPortal);
+            src.SwitchRender(mainPuzzle.Place(PlanetLabel.Contract));
         }
         else
         {
             mainPuzzle.Entry(destinationLabel).SummonPortal(mainPuzzle.DestinationPortal);
+            src.SwitchRender(mainPuzzle.Place(destinationLabel));
         }
     }
 
@@ -31,13 +36,13 @@ public class PortalSwitch : Interactable
     {
         if (button == null)
         {
-            portalSwitch();
+            Switch();
         }
         else if (button.Openness == OpennessType.Close)
         {
             button.Open();
             button.OnOpen += button.Close;
-            portalSwitch();
+            // portalSwitch();
         }
     }
 }

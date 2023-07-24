@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private PlayerHoldItem holdItem;
     [SerializeField]
-    private MainMenu menu;
+    private GameControl menu;
 
     void Awake()
     {
@@ -36,7 +36,7 @@ public class InputManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>(), GlobalManager.Settings.sensitivity);
+        look.ProcessLook(onFoot.Look.ReadValue<Vector2>(), DataManager.Settings.sensitivity);
     }
 
     private void OnEnable()

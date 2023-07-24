@@ -52,7 +52,6 @@ public class PlayerInteract : MonoBehaviour
         Target = null;
 
         Ray ray = new Ray(position, direction);
-        // Debug.DrawRay(ray.origin, ray.direction * distance);
 
         if (Physics.Raycast(ray, out InteractData, distance, mask))
         {
@@ -66,6 +65,7 @@ public class PlayerInteract : MonoBehaviour
         }
         else
         {
+            Debug.DrawRay(ray.origin, ray.direction * distance);
             ExtractPoint = (dist) => SimpleExctract(dist, distance);
         }
     }

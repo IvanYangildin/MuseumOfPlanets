@@ -13,7 +13,6 @@ static public class SceneLoader
         public bool isLoading = false;
 
 
-
         public IEnumerator load(string sceneName, string loadingName, bool reload)
         {
             isLoading = true;
@@ -52,6 +51,11 @@ static public class SceneLoader
 
     }
 
+    public static bool IsSceneLoaded(string sceneName)
+    {
+        Scene scene = SceneManager.GetSceneByName(sceneName);
+        return scene != null && scene.isLoaded;
+    }
 
     public static void LoadWithDeactivate(string sceneName, string loadingName, bool reload)
     {

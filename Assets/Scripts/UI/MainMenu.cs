@@ -1,31 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    string startScene, gameScene, menuScene, loadingScene;
+    Button continueButton, newgameButton, settingsButton, exitButton,
+        backButton;
+    [SerializeField]
+    GameObject settingsObject;
+    [SerializeField]
+    GameControl gameControl;
 
-    public void StartGame()
+
+    private void Awake()
     {
-        SceneLoader.LoadWithUnload(startScene, loadingScene, true);
+        OpenMain();
     }
 
-    public void ContinueGame()
+    public void OpenMain()
     {
-        SceneLoader.LoadWithUnload(gameScene, loadingScene, false);
+        settingsObject.gameObject.SetActive(false);
+        settingsButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(false);
+
+        continueButton.interactable = SceneLoader.IsSceneLoaded(gameControl.GameScene);
+        newgameButton.interactable = true;
+        settingsButton.interactable = true;
+        exitButton.interactable = true;
     }
 
-    public void ExitGame()
+    public void OpenSettings()
     {
-        GlobalManager.ExitGame();
-        Application.Quit();
-    }
+        settingsObject.gameObject.SetActive(true);
+        settingsButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(true);
 
-    public void MainManu()
-    {
-        SceneLoader.LoadWithDeactivate(menuScene, loadingScene, false);
+        continueButton.interactable = false;
+        newgameButton.interactable = false;
+        settingsButton.interactable = false;
+        exitButton.interactable = false;
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
-public class GlobalManager : GameSignleton<GlobalManager>
+public class DataManager : GameSignleton<DataManager>
 {
     [SerializeField]
     GameSettings settings;
     [SerializeField]
     string filename;
 
-    public event Action OnExit;
     public event Action OnLoaded;
 
     static public GameSettings Settings
@@ -48,9 +45,4 @@ public class GlobalManager : GameSignleton<GlobalManager>
         LoadData();
     }
 
-    static public void ExitGame()
-    {
-        Instance.OnExit?.Invoke();
-        SaveData();
-    }
 }
