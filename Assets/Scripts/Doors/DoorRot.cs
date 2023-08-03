@@ -23,7 +23,7 @@ public class DoorRot : DoorObject
         worldPoint = transform.localToWorldMatrix.MultiplyPoint3x4(pointOfRot);
     }
 
-    protected override bool openning(float dt)
+    protected override bool opening(float dt)
     {
         bool isFinished = false;
         float prevAngle = angle;

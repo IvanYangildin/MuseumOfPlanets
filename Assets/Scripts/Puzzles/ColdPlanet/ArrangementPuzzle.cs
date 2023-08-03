@@ -11,6 +11,9 @@ public class ArrangementPuzzle : MonoBehaviour
     [SerializeField]
     DoorObject door;
 
+    [SerializeField]
+    string lockedText, unlockedText;
+
     bool flowerArranged = false;
     bool radioArranged = false;
 
@@ -22,12 +25,22 @@ public class ArrangementPuzzle : MonoBehaviour
             if (flowerCheck.IsRightKey(item)) flowerArranged = isInput;
             if (radioCheck.IsRightKey(item)) radioArranged = isInput;
         }
-        if (flowerArranged && radioArranged) door.Unlock();
-        else door.Lock();
+        if (flowerArranged && radioArranged)
+        {
+            door.gameObject.GetComponent<Interactable>().promtMessage = unlockedText;
+            door.Unlock();
+        }
+        else
+        {
+            door.gameObject.GetComponent<Interactable>().promtMessage = lockedText;
+            door.Lock(); 
+        }
     }
 
     private void Awake()
     {
+        door.gameObject.GetComponent<Interactable>().promtMessage = lockedText;
+
         flowerTrigger.OnEnter += obj => toArrange(obj, true);
         flowerTrigger.OnExit += obj => toArrange(obj, false);
 

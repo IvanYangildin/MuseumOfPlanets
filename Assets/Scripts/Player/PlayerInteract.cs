@@ -41,7 +41,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        playerUI.UpdateText(string.Empty);
+        playerUI.UpdateText(playerUI.StandardText);
         Ray ray = new Ray(PlayerCamera.transform.position, PlayerCamera.transform.forward);
 
         SetInteraction(PlayerCamera.transform.position, PlayerCamera.transform.forward, distance);

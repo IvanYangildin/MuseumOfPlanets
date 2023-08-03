@@ -43,4 +43,9 @@ public class LavaCoat : TakenObject
         holder.HoldingItems.Remove(this);
     }
 
+    public override string DroppedText(PlayerHoldItem playerHold)
+    {
+        return playerHold.StandardDropText;
+    }
+
 }

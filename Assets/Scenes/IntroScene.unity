@@ -553,10 +553,10 @@ MonoBehaviour:
   printer: {fileID: 2115026321}
   textToPlay:
   - In your centuary things like collection of planet are normal.
-  - You're trying to employ as keeper of Museum of Planets.
+  - You're trying to gain employment as keeper of Museum of Planets.
   - You've heard a lot about this place, but first of all - how weird can be people
     working here.
-  - So entering you're prepared, that it will be unusual interview
+  - So entering you're prepared for unusual interview
   pauseBeforeStart: 0.1
   ClickOut:
     m_PersistentCalls:

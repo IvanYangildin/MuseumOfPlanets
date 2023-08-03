@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     [SerializeField]
-    protected string promtMessage;
+    public string promtMessage;
     public virtual string PromtMessage(PlayerInteract playerInteract) => promtMessage;
 
     protected virtual void lookInteract(PlayerInteract playerInteract)

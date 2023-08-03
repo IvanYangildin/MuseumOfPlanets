@@ -17,7 +17,7 @@ public class DoorUpping : DoorObject
         basicY = transform.position.y;
     }
 
-    protected override bool openning(float dt)
+    protected override bool opening(float dt)
     {
         bool isFinished = false;
 

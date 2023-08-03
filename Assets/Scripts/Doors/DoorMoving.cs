@@ -26,7 +26,7 @@ public class DoorMoving : DoorObject
         transform.position = worldFrom;
     }
 
-    protected override bool openning(float dt)
+    protected override bool opening(float dt)
     {
         bool isFinished = false;
 

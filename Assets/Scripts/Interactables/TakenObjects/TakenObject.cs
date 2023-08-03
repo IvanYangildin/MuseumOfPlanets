@@ -81,6 +81,16 @@ public class TakenObject : Interactable
         playerHold.Item = this;
     }
 
+    public virtual string TookText(PlayerHoldItem playerHold)
+    {
+        return playerHold.StandardDropText;
+    }
+
+    public virtual string DroppedText(PlayerHoldItem playerHold)
+    {
+        return string.Empty;
+    }
+
     public void Take(PlayerHoldItem playerHold)
     {
         if (CanTake(playerHold))
@@ -95,6 +105,7 @@ public class TakenObject : Interactable
 
             currentHolder = playerHold;
             AudioSource.PlayClipAtPoint(getTakenSound(playerHold), playerHold.transform.position);
+            playerHold.PlayerUser.StandardText = TookText(playerHold);
 
             take(playerHold);
         }
@@ -121,6 +132,8 @@ public class TakenObject : Interactable
             transform.SetParent(currentHolder.transform);
             transform.localRotation = defaultAngle;
             transform.SetParent(null);
+
+            currentHolder.PlayerUser.StandardText = DroppedText(currentHolder);
 
             drop();
             currentHolder = null;

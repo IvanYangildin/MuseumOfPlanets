@@ -5,8 +5,17 @@ public class PlayerHoldItem : MonoBehaviour
     [HideInInspector]
     public TakenObject Item;
     public GameObject ItemGameObject => (Item != null) ? Item.gameObject : null;
+    
     [SerializeField]
     private PlayerInteract playerInteract;
+    
+    [SerializeField]
+    private PlayerUI playerUser;
+    public PlayerUI PlayerUser => playerUser;
+    [SerializeField]
+    private string standardDropText;
+    public string StandardDropText => standardDropText;
+
     [SerializeField]
     float dropDistance;
 

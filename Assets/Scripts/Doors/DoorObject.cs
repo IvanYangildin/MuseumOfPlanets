@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum OpennessType { Open, Closing, Close, Openning }
+public enum OpennessType { Open, Closing, Close, Opening }
 
 public class DoorObject : MonoBehaviour
 {
@@ -21,7 +21,12 @@ public class DoorObject : MonoBehaviour
     public event ReactDoor OnOpening;
     public event ReactDoor OnClosing;
 
-    virtual protected bool openning(float dt) => true;
+    // OnOpeningClosed is called only when door is opening from closed state
+    public event ReactDoor OnOpeningClosed;
+    // OnClosingOpened is called only when door is closing from opened state
+    public event ReactDoor OnClosingOpened;
+
+    virtual protected bool opening(float dt) => true;
     virtual protected bool closing(float dt) => true;
     virtual protected bool motionless(float dt) => false;
 
@@ -33,9 +38,13 @@ public class DoorObject : MonoBehaviour
     {
         if (!IsLock)
         {
-            openness = OpennessType.Openning;
-            moving = openning;
+            bool wasClosed = ((openness == OpennessType.Close) || (openness == OpennessType.Closing));
+
+            openness = OpennessType.Opening;
+            moving = opening;
+            
             OnOpening?.Invoke();
+            if (wasClosed) OnOpeningClosed?.Invoke();
         }
     }
 
@@ -43,9 +52,13 @@ public class DoorObject : MonoBehaviour
     {
         if (!IsLock)
         {
+            bool wasOpen = ((openness == OpennessType.Open) || (openness == OpennessType.Opening));
+
             openness = OpennessType.Closing;
             moving = closing;
+
             OnClosing?.Invoke();
+            if (wasOpen) OnClosingOpened?.Invoke();
         }
     }
 
@@ -54,7 +67,7 @@ public class DoorObject : MonoBehaviour
         if (!IsLock)
         switch (openness)
         {
-            case OpennessType.Openning:
+            case OpennessType.Opening:
                 Close();
                 break;
             case OpennessType.Closing:
@@ -79,7 +92,7 @@ public class DoorObject : MonoBehaviour
         float dt = Time.deltaTime;
         if (moving(dt))
         {
-            if (openness == OpennessType.Openning)
+            if (openness == OpennessType.Opening)
             {
                 openness = OpennessType.Open;
                 OnOpen?.Invoke();
